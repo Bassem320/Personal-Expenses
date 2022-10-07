@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import './adaptive_text_button.dart';
 
 class NewTransaction extends StatefulWidget {
   const NewTransaction({required this.addTransaction});
@@ -18,7 +21,7 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime? _selectedDate;
 
   void _submitTransaction() {
-    if(_amountController.text.isEmpty){
+    if (_amountController.text.isEmpty) {
       return;
     }
     final title = _titleController.text;
@@ -26,7 +29,7 @@ class _NewTransactionState extends State<NewTransaction> {
     if (amount < 0 || title.isEmpty || _selectedDate == null) {
       return;
     }
-    widget.addTransaction(title, amount,_selectedDate);
+    widget.addTransaction(title, amount, _selectedDate);
     Navigator.of(context).pop();
   }
 
@@ -40,10 +43,9 @@ class _NewTransactionState extends State<NewTransaction> {
       if (datePicked == null) {
         return;
       }
-      setState((){
+      setState(() {
         _selectedDate = datePicked;
       });
-
     });
   }
 
@@ -86,12 +88,9 @@ class _NewTransactionState extends State<NewTransaction> {
                             : 'Date Picked: ${DateFormat.yMd().format(_selectedDate!)}',
                       ),
                     ),
-                    TextButton(
+                    AdaptiveTextButton(
+                      text: 'Choose Date',
                       onPressed: _startDatePicker,
-                      child: const Text(
-                        'Choose Date',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
                     ),
                   ],
                 ),
